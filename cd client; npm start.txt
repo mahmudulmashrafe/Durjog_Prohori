@@ -1,0 +1,10 @@
+cd client; npm start
+npm run dev
+npm run server
+node server/server.js
+npm run start-weather-cache
+cd server
+node create-admin.js
+cd admin-server ;  npm run dev
+cd ..; npm start
+1Qw!1234
