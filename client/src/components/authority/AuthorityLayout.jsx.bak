@@ -1,0 +1,224 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
+
+const AuthorityLayout = ({ children }) => {
+  const location = useLocation();
+  const { language } = useLanguage();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  
+  const menuItems = [
+    {
+      path: '/authority/dashboard',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+          <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+        </svg>
+      ),
+      label: language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'
+    },
+    {
+      path: '/authority/disasters',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
+        </svg>
+      ),
+      label: language === 'en' ? 'Disasters' : 'দুর্যোগ'
+    },
+    {
+      path: '/authority/map',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z" clipRule="evenodd" />
+        </svg>
+      ),
+      label: language === 'en' ? 'Map' : 'মানচিত্র'
+    },
+    {
+      path: '/authority/sos-reports',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z" clipRule="evenodd" />
+        </svg>
+      ),
+      label: language === 'en' ? 'SOS Reports' : 'এসওএস রিপোর্ট'
+    },
+    {
+      path: '/authority/assign',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+        </svg>
+      ),
+      label: language === 'en' ? 'Assign' : 'নিয়োগ'
+    }
+  ];
+
+  return (
+    <div className="flex flex-col min-h-screen w-full bg-white">
+      {/* Facebook-like Top Navigation */}
+      <header className="bg-white shadow w-full">
+        <div className="flex justify-between items-center h-14">
+          {/* Logo and Brand */}
+          <div className="flex items-center pl-4">
+            <Link to="/authority/dashboard" className="flex items-center">
+              <h1 className="text-xl font-bold text-blue-600">
+                দুর্যোগ প্রহরী
+              </h1>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center px-4 py-2 transition-colors ${
+                  location.pathname === item.path
+                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <span className="mr-1">{item.icon}</span>
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Profile and Notifications */}
+          <div className="flex items-center pr-4">
+            <button
+              className="p-1 rounded-full text-gray-600 hover:bg-gray-100 relative"
+              aria-label="Notifications"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+            </button>
+
+            <div className="relative ml-2">
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center p-1 rounded-full text-gray-600 hover:bg-gray-100 focus:outline-none"
+              >
+                <img
+                  className="h-8 w-8 rounded-full object-cover"
+                  src="https://via.placeholder.com/150"
+                  alt="User profile"
+                />
+                <span className="hidden md:block ml-1 font-medium text-sm">
+                  {language === 'en' ? 'Authority' : 'কর্তৃপক্ষ'}
+                </span>
+                <svg
+                  className="ml-1 h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 py-1 bg-white rounded-md shadow-lg z-10">
+                  <Link
+                    to="/authority/profile"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    {language === 'en' ? 'Your Profile' : 'আপনার প্রোফাইল'}
+                  </Link>
+                  <Link
+                    to="/authority/settings"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    {language === 'en' ? 'Settings' : 'সেটিংস'}
+                  </Link>
+                  <div className="border-t border-gray-100"></div>
+                  <Link
+                    to="/auth/signout"
+                    className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                  >
+                    {language === 'en' ? 'Sign Out' : 'সাইন আউট'}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="ml-1 inline-flex items-center justify-center p-1 rounded-md text-gray-600 hover:bg-gray-100 md:hidden"
+            >
+              <svg
+                className="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center px-4 py-3 ${
+                  location.pathname === item.path
+                    ? 'bg-gray-100 text-blue-600'
+                    : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="mr-3">{item.icon}</span>
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 w-full bg-white">
+        {children}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 py-2 text-center text-gray-600 text-sm">
+        <p>&copy; {new Date().getFullYear()} দুর্যোগ প্রহরী - {language === 'en' ? 'All Rights Reserved' : 'সর্বস্বত্ব সংরক্ষিত'}</p>
+      </footer>
+    </div>
+  );
+};
+
+export default AuthorityLayout; 

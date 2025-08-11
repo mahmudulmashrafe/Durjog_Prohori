@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0; padding:0; height:100%; width:100%; overflow:hidden;">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="দুর্যোগ প্রহরী - Your Weather and Disaster Alert Companion"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>দুর্যোগ প্রহরী</title>
+    <style>
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      
+      /* Fix Leaflet container issues */
+      .leaflet-container {
+        height: 100vh !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
+      
+      /* Fix attribution control position */
+      .leaflet-control-container .leaflet-bottom {
+        bottom: 0 !important;
+      }
+      
+      /* Fix zoom controls overlapping other elements */
+      .leaflet-control-container .leaflet-top {
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html> 
